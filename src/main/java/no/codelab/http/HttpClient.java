@@ -28,41 +28,11 @@ public class HttpClient {
         socket.getOutputStream().write("\r\n".getBytes());
         socket.getOutputStream().flush();
 
-    /*
-    //The response is re-built into it's full setup in order to be parsed in the HttpClientResponse class
-    StringBuilder response = new StringBuilder();
-    String responseLine;
-
-    //Recieve a response from server
-    while(!(responseLine = readLine(socket)).isEmpty()){
-      System.out.println("Server Response: " + responseLine);
-      response.append(responseLine);
-      response.append("\r\n");
-    }
-    System.out.println( "=== SERVER-RESPONSE: Reading Complete\r\n");
-     */
         //Sets the server response and returns it for later use.
         HttpClientResponse httpClientResponse = new HttpClientResponse(socket);
         this.response = httpClientResponse;
         return httpClientResponse;
     }
-  /*
-  //Reads individual lines of the input stream and finds end of stream appropriately
-  public String readLine(Socket socket) throws IOException {
-    int c;
-    StringBuilder responseLine = new StringBuilder();
-    while((c = socket.getInputStream().read()) != -1){
-      if(c == '\r'){
-        c = socket.getInputStream().read();
-        if(c != '\n'){
-          System.err.println("Unexpected character: " + ((char) c));
-        }
-        return responseLine.toString();
-      }
-      responseLine.append((char) c);
-    }
-    return responseLine.toString();
-  }*/
 
     public int getStatusCode() {
         return response.getStatusCode();
